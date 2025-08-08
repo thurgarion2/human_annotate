@@ -1,13 +1,17 @@
 [project]
 name = "human-annotate"
 version = "0.1.0"
-description = "Add your description here"
+description = "a web app that allow you to annotate your example using dspy.Signature"
 readme = "README.md"
+classifiers = ["Private :: Do Not Upload"]
 authors = [
     { name = "erwan serandour", email = "e.serandour@hispeed.ch" }
 ]
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "dspy>=2.6.27",
+    "python-fasthtml>=0.12.24",
+]
 
 [project.scripts]
 human-annotate = "human_annotate:main"

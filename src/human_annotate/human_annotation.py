@@ -146,9 +146,8 @@ def _form(signature:type[Signature], inputs:FormData, filled_outputs:FormData, o
     input_displays = [H2("Inputs", cls="text-2xl font-bold mb-4")]
     
     for name, value in inputs.items():
-        field_desc = signature.input_fields[name].description or name
         input_displays.extend([
-            H3(field_desc, cls="text-xl font-semibold mt-4"),
+            H3(name, cls="text-xl font-semibold mt-4"),
             P(str(value), cls="text-gray-700")
         ])
 
@@ -162,9 +161,10 @@ def _form(signature:type[Signature], inputs:FormData, filled_outputs:FormData, o
         if schema.get('enum'):
             form_fields.append(Label(schema.get('title', name), fr=field_id, cls="block text-gray-700 text-sm font-bold mb-2"))
             for v in schema['enum']:
-                is_checked = value == str(v)
+                v = f'"{v}"'
+                is_checked = value == v
                 form_fields.extend([
-                    Input(type="radio", id=f"{field_id}_{v}", name=field_id, value=f'"{v}"', checked=is_checked, cls="mr-2"),
+                    Input(type="radio", id=f"{field_id}_{v}", name=field_id, value=v, checked=is_checked, cls="mr-2"),
                     Label(str(v), fr=f"{field_id}_{v}", cls="mr-4")
                 ])
         else:
